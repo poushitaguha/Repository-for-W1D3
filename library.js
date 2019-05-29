@@ -77,7 +77,7 @@ var printTracks = function (array) {
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 
 var printPlaylist = function (playlistId) {
-  var libraryPlaylist = library.playlists;
+  let libraryPlaylist = library.playlists;
   let playlistObject = libraryPlaylist[playlistId];
   console.log(playlistObject.id + ": " + playlistObject.name + " - "
     + playlistObject.tracks.length + " tracks");
@@ -93,8 +93,24 @@ printPlaylist("p01");
 
 var addTrackToPlaylist = function (trackId, playlistId) {
 
+  let libraryTracks = library.tracks;
+  let libraryPlaylist = library.playlists;
+  let playlistObject = libraryPlaylist[playlistId];
+
+  for (trackItem in libraryTracks) {
+    let trackObject = libraryTracks[trackItem];
+      if (trackId === trackObject.id) {
+        playlistObject.tracks.push(trackId);
+        // console.log(playlistObject);
+      } else {
+        console.log("Track ID does not exist");
+      }
+
+  }
 }
 
+// addTrackToPlaylist("t03", "p01")
+addTrackToPlaylist("t03", "p01")
 
 // generates a unique id
 // (use this for addTrack and addPlaylist)
