@@ -52,22 +52,24 @@ printPlaylists();
 var printTracks = function (array) {
   var libraryTracks = library.tracks;
 
-  array.forEach(function(element) {
-
-      let trackObject = libraryTracks[element];
-      let result = trackObject.id + ": " + trackObject.name + " by "
-      + trackObject.artist + " (" + trackObject.album + ")";
-      console.log(result);
-
-  });
-  // for (trackItem in libraryTracks) {
-  //   let trackObject = libraryTracks[trackItem];
-  //   let result = trackObject.id + ": " + trackObject.name + " by "
-  //    + trackObject.artist + " (" + trackObject.album + ")";
-  //    console.log(result);
-  // }
-
-}
+    /* If statement to evaluate whether a string has been passed from the
+       printPlaylist() function */
+    if (arguments.length === 1 && Array.isArray(arguments[0]) === true) {
+      array.forEach(function(element) {
+          let trackObject = libraryTracks[element];
+          let result = trackObject.id + ": " + trackObject.name + " by " +
+            trackObject.artist + " (" + trackObject.album + ")";
+          console.log(result);
+      });
+    } else {
+      for (let trackItem in libraryTracks) {
+        let trackObject = libraryTracks[trackItem];
+        let result = trackObject.id + ": " + trackObject.name + " by " +
+          trackObject.artist + " (" + trackObject.album + ")";
+         console.log(result);
+      }
+    }
+  }
 
 // printTracks();
 
@@ -77,7 +79,7 @@ var printTracks = function (array) {
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 
 var printPlaylist = function (playlistId) {
-  let libraryPlaylist = library.playlists;
+  var libraryPlaylist = library.playlists;
   let playlistObject = libraryPlaylist[playlistId];
   console.log(playlistObject.id + ": " + playlistObject.name + " - "
     + playlistObject.tracks.length + " tracks");
@@ -93,7 +95,6 @@ printPlaylist("p01");
 // adds an existing track to an existing playlist
 
 var addTrackToPlaylist = function (trackId, playlistId) {
-
   let libraryTracks = library.tracks;
   let libraryPlaylists = library.playlists;
 
@@ -144,7 +145,6 @@ console.log(library.tracks);
 var addPlaylist = function (name) {
   let libraryPlaylist = library.playlists;
   let newId = uid();
-  console.log(newId);
   libraryPlaylist[newId] = {id: newId, name: name, tracks: []};
  };
 
