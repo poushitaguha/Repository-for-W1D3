@@ -31,7 +31,7 @@ uid: function() {
 
 // adds a playlist to the library
 
-addPlaylist: function(name) {
+addPlayList: function(name) {
   let libraryPlaylist = this.playlists;
   let newId = this.uid();
   libraryPlaylist[newId] = {id: newId, name: name, tracks: []};
