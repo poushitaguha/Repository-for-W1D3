@@ -41,7 +41,7 @@ var printPlaylists = function () {
 
 }
 
-// printPlaylists();
+printPlaylists();
 
 
 // prints a list of all tracks, in the form:
@@ -69,7 +69,7 @@ var printTracks = function (array) {
 
 }
 
-//printTracks();
+// printTracks();
 
 // prints a list of tracks for a given playlist, in the form:
 // p01: Coding Music - 2 tracks
@@ -89,28 +89,25 @@ var printPlaylist = function (playlistId) {
 
 printPlaylist("p01");
 
+
 // adds an existing track to an existing playlist
 
 var addTrackToPlaylist = function (trackId, playlistId) {
 
   let libraryTracks = library.tracks;
-  let libraryPlaylist = library.playlists;
-  let playlistObject = libraryPlaylist[playlistId];
+  let libraryPlaylists = library.playlists;
 
-  for (trackItem in libraryTracks) {
-    let trackObject = libraryTracks[trackItem];
-      if (trackId === trackObject.id) {
-        playlistObject.tracks.push(trackId);
-        // console.log(playlistObject);
-      } else {
-        console.log("Track ID does not exist");
-      }
-
+if ((libraryTracks).hasOwnProperty(trackId)) {
+  libraryPlaylists[playlistId].tracks.push(trackId);
+  console.log(libraryPlaylists[playlistId]);
+  } else if (!(libraryTracks.hasOwnProperty(trackId))) {
+  console.log("Track ID does not exist");
   }
+
 }
 
-// addTrackToPlaylist("t03", "p01")
 addTrackToPlaylist("t03", "p01")
+addTrackToPlaylist("t04", "p01")
 
 // generates a unique id
 // (use this for addTrack and addPlaylist)
@@ -123,15 +120,36 @@ var uid = function() {
 // adds a track to the library
 
 var addTrack = function (name, artist, album) {
+  let libraryTrackList = library.tracks;
+  let currentTotalTracks = Object.keys(libraryTrackList).length;
+  let newTotalTracks = currentTotalTracks + 1;
+  let newId = "";
 
-}
+  if (newTotalTracks < 10) {
+    newId = "t0" + newTotalTracks.toString(10);
+  } else {
+    newId = "t" + currentTotalTracks.toString(10);
+  }
+  console.log(newId);
+  libraryTrackList[newId] = {id: newId, name: name, artist: artist, album: album};
+};
+
+addTrack('test', 'test_artist', 'test album');
+addTrack('Posh', 'Beautiful', 'Pair Programming!');
+console.log(library.tracks);
 
 
 // adds a playlist to the library
 
 var addPlaylist = function (name) {
+  let libraryPlaylist = library.playlists;
+  let newId = uid();
+  console.log(newId);
+  libraryPlaylist[newId] = {id: newId, name: name, tracks: []};
+ };
 
-}
+addPlaylist('running');
+console.log(library.playlists);
 
 
 // STRETCH:
